@@ -18,21 +18,27 @@
                     <fieldset>
                         {{csrf_field()}}
                         <div class="form-group">
+                            Name     : <input type="text" class="form-control" name="username" required="required">	
+                        </div>
+                        <div class="form-group">
                             Username     : <input type="text" class="form-control" name="username" required="required">	
+                        </div>
+                        <div class="form-group">
+                            Telepon     : <input type="text" class="form-control" name="username" required="required">	
+                        </div>
+                        <div class="form-group">
+                            Email    : <input type="text" class="form-control" name="username" required="required">	
                         </div>
                         <div class="form-group">
                             Password: <input type="password" class="form-control" name="password" required="required">
                         </div>
-                        <div class="form-group">
-                            <a href="">Lupa Password?</a>
-                        </div>
                         <div class="form-group" style="margin-top:3%;">
-                            <input type="submit" value="Simpan Data" class="btn btn-primary form-control" style="background-color:#a5430a; border-color:#a5430a;">
+                            <input type="submit" value="Daftar" class="btn btn-primary form-control" style="background-color:#a5430a; border-color:#a5430a;">
                         </div>
                     </fieldset>
                 </form>
             </div>
-            <center><hr><p>Belum Punya Akun? <a href="/regis">Daftar</a></p></center>
+            <center><hr><p>Sudah Punya Akun? <a href="/regis">Login</a></p></center>
         </div>
     </div>
 </div>

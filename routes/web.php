@@ -17,11 +17,11 @@ Route::get('/', function () {
     return view('Page.Home');
 });
 Route::get('/regis', function(){
-    return view('Page.Acc.register');
+    return view('Page.Regis');
 });
 
 Route::post('/login', [UserController::class, 'login'])->name('pslogin');
 Route::get('/profile', [UserController::class, 'showProfile'])->middleware('auth');
 Route::get('/login', function() {
-    return view('Page.Acc.login'); // Gantilah dengan tampilan login Anda
+    return view('Page.Login'); // Gantilah dengan tampilan login Anda
 })->name('loginPage');

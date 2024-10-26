@@ -36,6 +36,16 @@
         @include('Partials.Navbar')
             @yield('container')
         @include('Partials.Footer')
+    @elseif(request()->is('profile'))
+        @include('Partials.Navbar')
+            @yield('container')
+        @include('Partials.Footer')
+    @elseif(request()->is('login'))
+            @yield('container')
+        @include('Partials.Footer')
+    @elseif(request()->is('regis'))
+            @yield('container')
+        @include('Partials.Footer')
     @else
         @yield('b')
     @endif
