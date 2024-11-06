@@ -46,6 +46,13 @@
     @elseif(request()->is('regis'))
             @yield('container')
         @include('Partials.Footer')
+    @elseif(request()->is('prds'))
+            @yield('container')
+        @include('Partials.Footer')
+    @elseif(request()->is('ppd'))
+        @include('Partials.Navbar')
+            @yield('container')
+        @include('Partials.Footer')
     @else
         @yield('b')
     @endif

@@ -21,14 +21,10 @@
                         <a class="nav-link" href="/" style="color: #ffffff;">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/kat" style="color: #ffffff;">Product</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/kontakk" style="color: #ffffff;">Comunity!</a>
+                        <a class="nav-link" href="/prds" style="color: #ffffff;">Product</a>
                     </li>
                 </ul>
                 <div class="d-flex align-items-center space-x-4">
-                    <!--<input class="form-control rounded-full text-black" placeholder="Event Documentary" type="text" style="margin-right:10px; background-color: #be4f0e; border: 0px; text-align: center;"/>-->
                     <button class="btn" style="background-color: #be4f0e; border-radius:12px; margin-right:10px; color: #ffffff;">Event</button>
                     <div class="d-flex align-items-center space-x-2" style="margin-right: 10px;">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg" alt="Flag of Indonesia" height="20" width="20" style="margin-right:10px;"/>

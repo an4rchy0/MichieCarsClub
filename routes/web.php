@@ -19,6 +19,12 @@ Route::get('/', function () {
 Route::get('/regis', function(){
     return view('Page.Regis');
 });
+Route::get('/prds', function(){
+    return view('Page.ProductAll');
+});
+Route::get('/ppd', function(){
+    return view('Page.prevProduc');
+});
 
 Route::post('/login', [UserController::class, 'login'])->name('pslogin');
 Route::get('/profile', [UserController::class, 'showProfile'])->middleware('auth');
