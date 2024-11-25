@@ -30,30 +30,43 @@
 </head>
 <body>
     <audio autoplay loop>
-        <source src="{{ asset('Song\sg.mp3') }}" type="audio/mpeg">
+        <source src="{{ asset('Song/sg.mp3') }}" type="audio/mpeg">
     </audio>
-    @if(request()->is('/'))
+    @php
+        $segment = request()->segment(1);
+    @endphp
+
+    @if($segment == '/')
         @include('Partials.Navbar')
             @yield('container')
         @include('Partials.Footer')
-    @elseif(request()->is('profile'))
+    @elseif($segment == 'profile')
         @include('Partials.Navbar')
             @yield('container')
         @include('Partials.Footer')
-    @elseif(request()->is('login'))
+    @elseif($segment == 'login')
             @yield('container')
         @include('Partials.Footer')
-    @elseif(request()->is('regis'))
+    @elseif($segment == 'regis')
             @yield('container')
         @include('Partials.Footer')
-    @elseif(request()->is('prds'))
+    @elseif($segment == 'prds')
             @yield('container')
         @include('Partials.Footer')
-    @elseif(request()->is('ppd'))
+    @elseif($segment == 'ppd')
+        @include('Partials.Navbar')
+            @yield('container')
+        @include('Partials.Footer')
+    @elseif($segment == 'addpdII')
+        @include('Partials.Navbar')
+            @yield('container')
+        @include('Partials.Footer')
+    @elseif($segment == 'addpd')
         @include('Partials.Navbar')
             @yield('container')
         @include('Partials.Footer')
     @else
+        <p>Kosong</p>
         @yield('b')
     @endif
 </body>

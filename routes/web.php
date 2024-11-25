@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdmController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +27,12 @@ Route::get('/prds', function(){
 Route::get('/ppd', function(){
     return view('Page.prevProduc');
 });
+Route::get('/addpdII/{userId}', function($userId){
+    return view('Page.addpdII', compact('userId'));
+})->name('addpdII');
 
+Route::get('/addpd', [UserController::class, 'showProfile'])->middleware('auth');
 Route::post('/login', [UserController::class, 'login'])->name('pslogin');
-Route::get('/profile', [UserController::class, 'showProfile'])->middleware('auth');
 Route::get('/login', function() {
-    return view('Page.Login'); // Gantilah dengan tampilan login Anda
+    return view('Page.LoginAdm');
 })->name('loginPage');
