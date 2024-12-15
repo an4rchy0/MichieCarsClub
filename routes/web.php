@@ -18,10 +18,13 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('Page.index');
 });
+Route::get('/addc/{userId}', function($userId) {
+    return view('Page.adm.admAdd', compact('userId'));
+})->name('addc')->middleware('auth');
 
 Route::post('/login', [UserController::class, 'login'])->name('pslogin');
-Route::get('/addc', function() {return view('Page.adm.admAdd');})->middleware('auth');
-//Route::get('/addc', [UserController::class, 'showProfile'])->middleware('auth');
+//Route::get('/addc', function() {return view('Page.adm.admAdd');})->name('addc')->middleware('auth');
+Route::get('/profile', [UserController::class, 'showProfile'])->middleware('auth');
 Route::get('/login', function() {
     return view('Page.adm.admLog');
 })->name('login');
