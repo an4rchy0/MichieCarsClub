@@ -7,68 +7,60 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
-class UserController extends Controller
+class userController extends Controller
 {
-    /*public function index(){
-        $userId = Auth::id(); // Mendapatkan ID pengguna yang sedang login
-        $contents = Content::where('user_id', $userId)->get(); // Mengambil konten yang diinputkan oleh pengguna
-        return view('Page.profile', compact('contents'));
-    }*/
     public function login(Request $request){
         $credentials = $request->only('username', 'password');
-        $admin = DB::table('admin')
+        $user = DB::table('admin')
             ->where('username', $credentials['username'])
             ->where('password', $credentials['password'])
             ->first();
-        if ($admin) {
-            Auth::loginUsingId($admin->IDAdmin);
-            session(['admin' => $admin]);
-            return redirect('/addpd');
+        if ($user) {
+            Auth::loginUsingId($user->IDAdmin);
+            session(['user' => $user]);
+            Auth::id($user->IDAdmin);
+            return redirect('/profile');
         } else {
+            Log::info('User not found');
             return redirect('/login')->with('msg', 'Kesalahan username &/ Password!');
         }
     }
     public function showProfile(){
-        $user = session('admin');
+        $user = session('user');
+        $userString = strval($user->IDAdmin);
 
         if (!$user) {
-            return redirect()->route('loginPage');
+            return redirect()->route('login');
         }else{
-            $userId = Auth::id(); // Mendapatkan ID pengguna yang sedang login
-            $contents = DB::table('katalog')->get();
-            return view('Page.Addpd', compact('user','contents'));
+            $userId = Auth::id(); 
+            $transactions = DB::table('transaksi as t')
+            ->join('katalog as p', DB::raw('t.produk COLLATE utf8mb4_unicode_ci'), '=', DB::raw('p.IDCar COLLATE utf8mb4_unicode_ci'))
+            ->join('user as u', DB::raw('t.userID COLLATE utf8mb4_unicode_ci'), '=', DB::raw('u.IDusr COLLATE utf8mb4_unicode_ci'))
+            ->select('p.name', 'p.prdpht', 't.total_harga', 'p.address', 'u.name as nama_user')
+            //->where(DB::raw('u.idusr_kbt COLLATE utf8mb4_unicode_ci'), '=', $userString)
+            ->paginate(2);
+
+            $pdc = DB::table('katalog')->paginate(3);
+
+            return view('Page.profile', compact('user', 'userString', 'userId', 'transactions','pdc'));
         }
     }
-	public function store(Request $request){
-		DB::table('usr_kpt')->insert([
-    		'idusr_kbt'		=> $request->usid,
-    		'name'  		=> $request->usname,
-    		'call'		    => $request->tlp,
-    		'email'     	=> $request->usemail,
-    		'password'     	=> $request->uspass,
+
+    //add car
+    public function store(Request $request){
+		$file = $request->file('prdpht');
+		$fileName = uniqid().'.'. $file->getClientOriginalExtension();
+		$data['prdpht'] = $file->storeAs('public/photo', $fileName);
+
+		DB::table('product')->insert([
+    		'idproduct'		=> $request->prdid,
+    		'prdname'		=> $request->prdname,
+    		'prdprice'		=> $request->prdprice,
+    		'prddescript'	=> $request->prddescript,
+    		'prdqty'     	=> $request->prdqty,
+    		'prdpht'       	=> $fileName,
+			'idusr_kbt'		=> $request->prdus,
     	]);
-		return redirect('/profile')->with('successMsg', 'Regis Successfully');
+		return redirect('/profile')->with('msg', 'Data Stored Successfully');
 	}
-    //form edit
-    public function ups($id){
-    	$pasivar = DB::table('dokters')->where('iddokter', $id)->get();
-    	return view('editDokter', ['pas' => $pasivar]);
-    }
-    //untuk form simpan edit
-    public function up(Request $request,$iddokter){
-    	DB::table('dokters')->where('iddokter', $iddokter)->update([
-    		'namadokter' => $request->nama,
-    		'jk'         => $request->jk,
-    		'tanggallahir' => $request->tanggallahir,
-    		'nohp'         => $request->nohp,
-    		'email'        => $request->email,
-    		'alamat'       => $request->alamat
-    	]);
-    	//alihkan ke view dokter
-    	return redirect('/dokter')->with('succesMsg', 'Data Telah Diperbarui');
-    }
-    public function del($id){
-    	DB::table('dokters')->where('iddokter',$id)->delete();
-    	return redirect('/dokter')->with('succesMsg', 'Data Deleted Successfully');
-    }
 }

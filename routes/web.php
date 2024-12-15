@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth; 
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdmController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,23 +16,21 @@ use App\Http\Controllers\AdmController;
 */
 
 Route::get('/', function () {
-    return view('Page.Home');
+    return view('Page.index');
 });
-Route::get('/regis', function(){
-    return view('Page.Regis');
-});
-Route::get('/prds', function(){
-    return view('Page.ProductAll');
-});
-Route::get('/ppd', function(){
-    return view('Page.prevProduc');
-});
-Route::get('/addpdII/{userId}', function($userId){
-    return view('Page.addpdII', compact('userId'));
-})->name('addpdII');
+Route::get('/addc/{userId}', function($userId) {
+    return view('Page.adm.admAdd', compact('userId'));
+})->name('addc')->middleware('auth');
 
-Route::get('/addpd', [UserController::class, 'showProfile'])->middleware('auth');
 Route::post('/login', [UserController::class, 'login'])->name('pslogin');
+//Route::get('/addc', function() {return view('Page.adm.admAdd');})->name('addc')->middleware('auth');
+Route::get('/profile', [UserController::class, 'showProfile'])->middleware('auth');
 Route::get('/login', function() {
-    return view('Page.LoginAdm');
-})->name('loginPage');
+    return view('Page.adm.admLog');
+})->name('login');
+
+Route::post('/logout', function () { 
+    Auth::logout(); 
+    session()->flush(); 
+    return redirect('/'); 
+})->name('logout');
