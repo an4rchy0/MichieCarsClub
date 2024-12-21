@@ -33,6 +33,12 @@ class userController extends Controller
             return redirect()->route('login');
         }else{
             $userId = Auth::id(); 
+            $pdc = DB::table('katalog')
+                //->where('idusr_kbt', $userString)
+                ->paginate(3);
+            $cus = DB::table('user')
+                ->paginate(10);
+
             $transactions = DB::table('transaksi as t')
             ->join('katalog as p', DB::raw('t.produk COLLATE utf8mb4_unicode_ci'), '=', DB::raw('p.IDCar COLLATE utf8mb4_unicode_ci'))
             ->join('user as u', DB::raw('t.userID COLLATE utf8mb4_unicode_ci'), '=', DB::raw('u.IDusr COLLATE utf8mb4_unicode_ci'))
@@ -42,7 +48,7 @@ class userController extends Controller
 
             $pdc = DB::table('katalog')->paginate(3);
 
-            return view('Page.profile', compact('user', 'userString', 'userId', 'transactions','pdc'));
+            return view('Page.profile', compact('user', 'userString', 'userId', 'transactions','pdc', 'cus'));
         }
     }
 
@@ -52,15 +58,21 @@ class userController extends Controller
 		$fileName = uniqid().'.'. $file->getClientOriginalExtension();
 		$data['prdpht'] = $file->storeAs('public/photo', $fileName);
 
-		DB::table('product')->insert([
-    		'idproduct'		=> $request->prdid,
-    		'prdname'		=> $request->prdname,
-    		'prdprice'		=> $request->prdprice,
-    		'prddescript'	=> $request->prddescript,
-    		'prdqty'     	=> $request->prdqty,
+		DB::table('katalog')->insert([
+    		'IDCar'		=> $request->prdid,
+    		'name'		=> $request->prdname,
+    		'price'		=> $request->prdprice,
+    		'descr'	=> $request->prddescript,
     		'prdpht'       	=> $fileName,
-			'idusr_kbt'		=> $request->prdus,
+			'IDAdmin'		=> $request->prdus,
     	]);
 		return redirect('/profile')->with('msg', 'Data Stored Successfully');
+	}
+    public function show($id, $ide) {
+		$content = DB::table('product')->where('idproduct', $id)->first();
+		$pdcvarB = DB::table('product')->paginate(3);
+		$user = session('user');
+        $userString = strval($user->idusr_kbt);
+		return view('Page.buycart', ['content' => $content, 'userID' => $ide, 'pdcID' => $id, 'pdcB' => $pdcvarB, 'us' => $userString]);
 	}
 }
