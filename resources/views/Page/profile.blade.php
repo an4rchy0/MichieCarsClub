@@ -135,12 +135,12 @@
                     <div class="pdc">
                         @if ($pdc->isEmpty())
                             <div class="row">
-                                <a href="#" data-toggle="modal" data-target="#addModal{{$user->IDAdmin}}" style="padding:1%; margin: 2% 0; border:1px solid; text-decoration:none; width:25%; text-align:center">Tambah (+)</a>
+                                <a href="#" data-toggle="modal" data-target="#addModal{{$user->IDAdmin}}" style="padding:1%; margin: 2% 0; border:1px solid; text-decoration:none; width:25%; text-align:center">Add Product (+)</a>
                                 <div class="modal fade" id="addModal{{$user->IDAdmin}}" tabindex="-1" role="dialog" aria-labelledby="addModalLabel{{$user->IDAdmin}}" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 80%;">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="addModalLabel{{$user->IDAdmin}}">Tambahkan Produk</h5>
+                                                <h5 class="modal-title" id="addModalLabel{{$user->IDAdmin}}">Add Product</h5>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="row" style="padding:0% 3%;">
@@ -203,18 +203,18 @@
                                     </div>
                                 </div>
                                 <div class="alert alert-info d-flex justify-content-center align-items-center" role="alert" style="width:90%;">
-                                    Uppss.. Belum ada produk yang ditambahkan 
+                                    Uppss.. Nothing product added now!
                                 </div>
                             </div>
                         @else
                             <div class="row d-flex justify-content-center align-items-center">
                                 <div class="col-md-12 d-flex justify-content-center align-items-center">
-                                    <a href="#" data-toggle="modal" data-target="#addModal{{$user->IDAdmin}}" style="padding:1%; margin: 2% 0; border:1px solid; text-decoration:none; width:25%; text-align:center">Tambah (+)</a>
+                                    <a href="#" data-toggle="modal" data-target="#addModal{{$user->IDAdmin}}" style="padding:1%; margin: 2% 0; border:1px solid; text-decoration:none; width:25%; text-align:center">Add Product (+)</a>
                                     <div class="modal fade" id="addModal{{$user->IDAdmin}}" tabindex="-1" role="dialog" aria-labelledby="addModalLabel{{$user->IDAdmin}}" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 80%;">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="addModalLabel{{$user->IDAdmin}}">Tambahkan Produk</h5>
+                                                    <h5 class="modal-title" id="addModalLabel{{$user->IDAdmin}}">Add Product</h5>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="row" style="padding:0% 3%;">
@@ -277,51 +277,79 @@
                                         </div>
                                     </div>
                                 </div>
-                            @foreach ($pdc as $pd)
-                                <div class="col-md-4 d-flex justify-content-center align-items-center" style="margin-top:25px;">
-                                    <div class="card" style="width: 300px;">
-                                        <img src="{{asset('storage/photo/'.$pd->prdpht)}}" class="card-img-top img-responsive" alt="Product" style="width : 100%; height: 223px;">
-                                        <h5 class="card-title" style="padding-top:2% 0;">
-                                            <a href="#" data-toggle="modal" data-target="#prevModal{{$pd->IDCar}}" style="text-decoration:none; color:inherit;">{{$pd->name}}</a>
-                                        </h5>
-                                        <div class="card-footer">
-                                            <a href="#" data-toggle="modal" data-target="#deleteModal{{$pd->IDCar}}"><i class="fa fa-trash" style="font-size: 20px;"></i></a>
-                                            <div class="modal fade" id="deleteModal{{$pd->IDCar}}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{$pd->IDCar}}" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="deleteModalLabel{{$pd->IDCar}}">Konfirmasi Hapus</h5>
-                                                        </div>
+                                @foreach ($pdc as $pd)
+                                    <div class="col-md-4 d-flex justify-content-center align-items-center" style="margin-top:0px;">
+                                        <div class="card" style="width: 300px; padding;0%;">
+                                            <img class="card-img-top img-responsive margin" src="{{asset('storage/photo/'.$pd->prdpht)}}" alt="Product" style="width : 100%; height: 223px; object-fit: cover;">
+                                            <div data-aos="fade-up" data-aos-delay="500" class="card-body">
+                                                <h5 class="card-title" style="padding-top:2% 0;"><a href="#" data-toggle="modal" data-target="#prevModal{{$pd->IDCar}}" style="text-decoration:none; color:inherit;">{{ \App\Helpers\StringHelper::limitWords($pd->name, 10) }}</a></h5>
+                                                <p class="card-text" style="text-align: justify;">Price: Rp{{ number_format($pd->price, 2, ',', '.') }} <br><div style="margin-top:1px;">{{ \App\Helpers\StringHelper::limitWords($pd->descr, 15) }} ...</div> </p>
+                                                <p class="card-text"><small class="text-body-secondary">Indonesia</small></p>
+                                            </div>
+                                            <div class="card-footer">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal fade" id="prevModal{{$pd->IDCar}}" tabindex="-1" role="dialog" aria-labelledby="prevModalLabel{{$pd->IDCar}}" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 80%;">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="prevModalLabel{{$pd->IDCar}}">Preview Produk</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row" style="padding:0% 3%;">
                                                         <div class="modal-body">
-                                                            Apakah Anda yakin ingin menghapus produk ini?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                        </div>
+                                                            <div class="row" style="padding:0% 3%;">
+                                                                <form action="{{ url('/upPD', $pd->IDCar)}}" method="post" class="bg-body-tertiary rounded-3" style="padding:5% 2%; box-shadow: 0 4px 8px rgba(0.1, 0.1, 0.1, 0.2);" enctype="multipart/form-data">
+                                                                    <fieldset>
+                                                                        {{csrf_field()}}
+                                                                        <div class="row" style="padding:2%">
+                                                                            <div class="col-md-6 d-flex flex-column" style="">
+                                                                                <img src="{{asset('storage/photo/'.$pd->prdpht)}}" class="card-img-top img-responsive" alt="Product" style="width : 100%;">
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <h2>Update Product Here!</h2><br>Cars Name <input type="text" class="form-control" name="prdname" required="required"  value="{{$pd->name}}">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    Product Price: <input type="number" class="form-control" name="prdprice" required="required" value="{{$pd->price}}">
+                                                                                </div>
+                                                                                <div class="form-group"> 
+                                                                                    Description: <textarea class="form-control w-100" name="prddescript" required="required" style="height: 100px;">{{ $pd->descr }}</textarea><br> 
+                                                                                </div>
+                                                                                <input type="submit" value="Save Data!" class="btn btn-primary form-control"><br><br>
+                                                                            </div>
+                                                                        </div>
+                                                                    </fieldset>
+                                                                </form>
+                                                                <a href="#" data-toggle="modal" data-target="#deleteModal{{$pd->IDCar}}" style="padding:1%; margin: 2% 0; border:1px solid; text-decoration:none; width:100%; text-align:center; color: red;"><i class="fa fa-trash" style="font-size: 20px;"></i>&nbsp Delete</a>
+                                                                <div class="modal fade" id="deleteModal{{$pd->IDCar}}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{$pd->IDCar}}" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="deleteModalLabel{{$pd->IDCar}}">Confirm to Delete</h5>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                Are you sure to delete this item?
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                                <a href="{{ route('pd.del', ['id' => $pd->IDCar]) }}" class="btn btn-danger">Delete</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>     
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="modal fade" id="prevModal{{$pd->IDCar}}" tabindex="-1" role="dialog" aria-labelledby="prevModalLabel{{$pd->IDCar}}" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 80%;">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="prevModalLabel{{$pd->IDCar}}">Preview Produk</h5>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row" style="padding:0% 3%;">
-                                                                                    
+                                                <div class="modal-footer">
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
                                 <div class="d-flex justify-content-center" style="margin-top:2%;">
                                     {{ $pdc->links('pagination::bootstrap-4') }}
                                 </div>
@@ -333,7 +361,7 @@
                         @if ($cus->isEmpty())
                             <div class="row">
                                 <div xxx="fade-up" xxx="400" class="alert alert-info d-flex justify-content-center align-items-center" role="alert" style="width:90%;">
-                                    Uppss.. Belum ada produk yang ditambahkan 
+                                    Uppss.. Nothing someone registered now!
                                 </div>
                             </div>
                         @else

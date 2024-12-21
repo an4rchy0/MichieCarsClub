@@ -22,9 +22,12 @@ Route::get('/addc/{userId}', function($userId) {
     return view('Page.adm.admAdd', compact('userId'));
 })->name('addc')->middleware('auth');
 
+Route::get('/', [UserController::class, 'indexhm']);
 Route::get('/buyPd/{id}/{ide}', [UserController::class, 'show'])->name('pd.show')->middleware('auth');
+Route::get('/pd.del/{id}', [UserController::class, 'del'])->name('pd.del')->middleware('auth');
 
-Route::post('/PrdStore', [UserController::class, 'store']);
+Route::post('/PrdStore', [UserController::class, 'store'])->middleware('auth');
+Route::post('/upPD/{id}', [UserController::class, 'up'])->middleware('auth');
 
 Route::post('/login', [UserController::class, 'login'])->name('pslogin');
 Route::get('/profile', [UserController::class, 'showProfile'])->middleware('auth');

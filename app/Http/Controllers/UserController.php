@@ -25,6 +25,18 @@ class userController extends Controller
             return redirect('/login')->with('msg', 'Kesalahan username &/ Password!');
         }
     }
+    public function indexhm(){
+		$pdc = DB::table('katalog')->paginate(12);
+		$user = session('user');
+		$userString = 'false';
+        if (!$user == false) {
+            $userString = strval($user->idusr_kbt);
+        }
+		return view('Page.index', [
+			'pdc' => $pdc,
+			'us' => $userString,
+		]); 
+    }
     public function showProfile(){
         $user = session('user');
         $userString = strval($user->IDAdmin);
@@ -68,11 +80,17 @@ class userController extends Controller
     	]);
 		return redirect('/profile')->with('msg', 'Data Stored Successfully');
 	}
-    public function show($id, $ide) {
-		$content = DB::table('product')->where('idproduct', $id)->first();
-		$pdcvarB = DB::table('product')->paginate(3);
-		$user = session('user');
-        $userString = strval($user->idusr_kbt);
-		return view('Page.buycart', ['content' => $content, 'userID' => $ide, 'pdcID' => $id, 'pdcB' => $pdcvarB, 'us' => $userString]);
-	}
+    public function up(Request $request,$IDCar){
+    	DB::table('katalog')->where('IDCar', $IDCar)->update([
+    		'name'      => $request->prdname,
+    		'price'  => $request->prdprice,
+    		'descr'     => $request->prddescript,
+    	]);
+    	return redirect('/profile')->with('succesMsg', 'Data Telah Diperbarui!');
+    }
+    public function del($id){
+    	DB::table('katalog')->where('IDCar',$id)->delete();
+    	return redirect('/profile')->with('succesMsg', 'Data berhasil dihapus!');
+    }
+    
 }
