@@ -46,7 +46,7 @@
 						<img data-aos="fade-up" data-aos-delay="600" src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg" alt="Flag of Indonesia" height="20" width="20" style="margin-right:10px;"/>
 						<span data-aos="fade-up" data-aos-delay="700" style="color:inherit; margin-right:20px;"> <span style="margin-right:10px;"> <b>IDN | </b></span> 
 						<button type="button" class="btn position-relative" style="background-color:#FFD017">
-							<a data-aos="fade-up" data-aos-delay="800" href="/profile"><i class="fa-solid fa-user" style="color:#ffff; height:20px; width:20px;"></i></a></span>
+							<a data-aos="fade-up" data-aos-delay="800" href="/profileus"><i class="fa-solid fa-user" style="color:#ffff; height:20px; width:20px;"></i></a></span>
                     	</button>
 					</div>
 				</nav>
@@ -62,7 +62,7 @@
 				<img data-aos="fade-up" data-aos-delay="600" src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg" alt="Flag of Indonesia" height="20" width="20" style="margin-right:10px;"/>
 				<span data-aos="fade-up" data-aos-delay="700" style="color:inherit; margin-right:20px;"> <span style="margin-right:10px;"> <b>IDN | </b></span> 
 				<button type="button" class="btn position-relative" style="background-color:#FFD017">
-					<a data-aos="fade-up" data-aos-delay="800" href="/profile"><i class="fa-solid fa-user" style="color:#ffff; height:20px; width:20px;"></i></a></span>
+					<a data-aos="fade-up" data-aos-delay="800" href="/profileus"><i class="fa-solid fa-user" style="color:#ffff; height:20px; width:20px;"></i></a></span>
             	</button>
 			</div>
 
@@ -220,7 +220,7 @@
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="{{asset('storage/photo/'.$p->prdpht)}}" alt="IMG-PRODUCT">
-							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">Quick View</a>
+							<a href="#" data-toggle="modal" data-target="#prevModal{{$p->IDCar}}" style="text-decoration:none; color:inherit;" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">Quick View</a></h5>
 						</div>
 
 						<div class="block2-txt flex-w flex-t p-t-14">
@@ -237,102 +237,61 @@
 						</div>
 					</div>
 					<!-- Modal1 -->
-					<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
-						<div class="overlay-modal1 js-hide-modal1"></div>
-						<div class="container">
-							<div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
-								<button class="how-pos3 hov3 trans-04 js-hide-modal1"><img src="images/icons/icon-close.png" alt="CLOSE"></button>
-								<div class="row">
-									<div class="col-md-6 col-lg-7 p-b-30">
-										<div class="p-l-25 p-r-30 p-lr-0-lg">
-											<div class="wrap-slick3 flex-sb flex-w">
-												<div class="wrap-slick3-dots"></div>
-												<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
-												<div class="slick3 gallery-lb">
-													<div class="item-slick3" data-thumb="{{asset('storage/photo/'.$p->prdpht)}}">
-														<div class="wrap-pic-w pos-relative">
-															<img src="{{asset('storage/photo/'.$p->prdpht)}}" alt="IMG-PRODUCT">
-															<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{asset('storage/photo/'.$p->prdpht)}}">
-																<i class="fa fa-expand"></i>
-															</a>
-														</div>
-													</div>
+					<div class="modal fade" id="prevModal{{$p->IDCar}}" tabindex="-1" role="dialog" aria-labelledby="prevModalLabel{{$p->IDCar}}" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 80%;">
+                            <div class="modal-content">
+        	                    <div class="modal-header">
+                                    <h5 class="modal-title" id="prevModalLabel{{$p->IDCar}}">Preview Produk</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row" style="padding:0% 3%;">
+                                        <div class="modal-body">
+                                            <div class="row" style="padding:0% 3%;">
+												<div class="col-md-6">
+													<img src="{{asset('storage/photo/'.$p->prdpht)}}" alt="Product" width="300px">
 												</div>
-											</div>
-										</div>
-									</div>
-									
-									<div class="col-md-6 col-lg-5 p-b-30">
-										<div class="p-r-50 p-t-5 p-lr-0-lg">
-											<h4 class="mtext-105 cl2 js-name-detail p-b-14">{{$p->name}}</h4>
-											<span class="mtext-106 cl2">{{$p->price}}</span>
-											<p class="stext-102 cl3 p-t-23">{{$p->descr}}</p>
-											<?php 
-                                                    if (!function_exists('generateid')) {
-                                                            function generateid(){
-                                                            $hari = date('l');
-                                                            $tanggal = date('d');
-                                                            $bulan = date('M');
-                                                            $blnangka = date('m');
-                                                            $tahun = date('y');
-                                                            $jam = date('h');
-                                                            $minute = date('i');
-                                                            $detik = date('s');
-                                                            $haricut = substr($hari,0,1);
-                                                            $bulancut = substr($bulan,0,1);
-                                                            $hourcut = substr($jam,0,1);
-                                                            $minutecut = substr($minute,0,1);
-                                                            $detikcut = substr($detik,0,1);
-                                                        $kodejoin = "TR-{$haricut}{$bulancut}{$hourcut}{$minutecut}{$detikcut}";
-                                                        return $kodejoin;
-                        	                        }
-                                                }
-                                            ?>
-											<form action="/stbuy" method="post" class="bg-body-tertiary rounded-3" style="padding:2%" enctype="multipart/form-data">
-												<fieldset>
-													{{csrf_field()}}
-													<div class="form-group form-inline">
-														Kuantitas : 
-														<div class="form-group input-group-inline"> 
-															<input type="number" class="form-control" name="qty" required="required" placeholder="Jumlah Barang"> 
-															<input type="text" class="form-control" name="tqty" required="required" placeholder="Total" disabled> 
-														</div>
-													</div>
-													<div class="form-group form-inline">
-														<input type="text" class="form-control" name="trid" value="<?php echo generateid(); ?>" hidden>
-														<input type="text" class="form-control" name="pdcid" value="{{ $p }}" hidden>
-													</div>
-													<div class="form-group form-inline">
-														Alamat : 
-														<input type="text" class="form-control" name="address" required="required"placeholder="Alamat Anda" style="margin-right: 10px;">
-													</div>
-													<div class="form-group form-inline">
-														Jasa Kirim & Aplikasi : 
-														<input type="text" class="form-control" name="price" required="required" placeholder="Biaya Jasa & Aplikasi" style="margin-right: 10px;" disabled>
-													</div>
-													<div class="form-group form-inline">
-														Total
-														<div class="input-group mb-3">
-															<div class="input-group-append">
-																<span class="input-group-text" id="basic-addon1">Rp</span>
+												<div class="col-md-6">
+													<h1>{{$p->name}}</h1> <br> 
+													Avaibility : {{ $p->prdqty > 0 ? 'Available' : 'Not Available' }}<br> 
+													Harga : Rp{{ number_format($p->price, 2, ',', '.') }}
+													<form action="/stbuy" method="post" class="bg-body-tertiary rounded-3" style="padding:2%" enctype="multipart/form-data">
+														<fieldset>
+															{{csrf_field()}}
+															<div class="form-group">
+																<input type="text" class="form-control" name="pdcid" value="{{ $p->IDCar }}" hidden>
 															</div>
-															<input type="text" class="form-control" name="total" id="total" required="required" placeholder="Total" style="background-color: #E7E9E7;" readonly>
-														</div>
-													</div>
-													<div class="form-group form-inline"> 
-														<input type="text" class="form-control" name="usid" required="required" placeholder="Total" style="margin-right: 10px;" value="{{ $userID }}" hidden>
-													</div>
-													<div class="form-group" style="margin-top:3%;"> 
-														<input type="submit" value="Beli Sekarang" class="btn btn-primary form-control"> 
-													</div>
-												</fieldset>
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+															<div class="form-group">
+																Alamat : <textarea type="text" name="address" id="address" class="form-control" placeholder="Alamat pengiriman" style="height: 100px;" required></textarea>
+															</div>
+															<div class="form-group">
+																Jasa Kirim & Aplikasi : <input type="text" class="form-control" name="price" required="required" placeholder="Biaya Jasa & Aplikasi" disabled>
+															</div>
+															<div class="form-group">
+																Total
+																<div class="input-group mb-3">
+																	<div class="input-group-append">
+																		<span class="input-group-text" style="padding
+																		:1%;" id="basic-addon1">Rp</span>
+																	</div>
+																	<input type="text" class="form-control" name="total" id="total" required="required" placeholder="Total" style="background-color: #E7E9E7;" readonly>
+																</div>
+															</div>
+															<div class="form-group form-inline"> 
+																<input type="text" class="form-control" name="usid" required="required" placeholder="Total" style="margin-right: 10px;" value="{{ 9218 }}" hidden>
+															</div>
+															<div class="form-group" style="margin-top:3%;"> 
+																<input type="submit" value="Beli Sekarang" class="btn btn-primary form-control"> 
+															</div>
+														</fieldset>
+													</form>
+												</div>
+                                            </div>
+                                        </div>     
+                                    </div>
+                                </div>
+                            <div class="modal-footer"></div>
+                    	</div></div>
+                    </div>
 				</div>
 				@endforeach
 				<div class="d-flex justify-content-center">
@@ -460,13 +419,40 @@
 		<span class="symbol-btn-back-to-top"><i class="zmdi zmdi-chevron-up"></i></span>
 	</div>
 
-	
+	<script defer>
+		function generaterandprc() {
+			return Math.floor(Math.random() * (15000 - 10000 + 1)) + 10000 + 2500;
+		}
+
+		document.addEventListener('DOMContentLoaded', (event) => {
+			const addressInput = document.querySelector('textarea[name="address"]');
+			const priceInput = document.querySelector('input[name="price"]');
+
+			addressInput.addEventListener('input', () => {
+				if (addressInput.value !== "") {
+					priceInput.value = generaterandprc();
+				} else {
+					priceInput.value = "";
+				}
+				updateTotal();
+			});
+
+			const totalInput = document.querySelector('input[name="total"]');
+
+			function updateTotal() {
+				if (priceInput.value !== "") {
+					const priceValue = parseFloat(priceInput.value.replace('Rp. ', ''));
+					totalInput.value = `Rp. ${priceValue}`;
+				} else {
+					totalInput.value = "";
+				}
+			}
+		});
+	</script>
 
 <!--===============================================================================================-->	
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
 	<script src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
 	<script src="vendor/bootstrap/js/popper.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
@@ -479,10 +465,8 @@
 			});
 		})
 	</script>
-<!--===============================================================================================-->
 	<script src="vendor/daterangepicker/moment.min.js"></script>
 	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
 	<script src="vendor/slick/slick.min.js"></script>
 	<script src="js/slick-custom.js"></script>
 <!--===============================================================================================-->
@@ -506,7 +490,6 @@
 	</script>
 <!--===============================================================================================-->
 	<script src="vendor/isotope/isotope.pkgd.min.js"></script>
-<!--===============================================================================================-->
 	<script src="vendor/sweetalert/sweetalert.min.js"></script>
 	<script>
 		$('.js-addwish-b2').on('click', function(e){

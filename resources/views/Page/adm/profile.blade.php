@@ -357,53 +357,7 @@
                         @endif
                         <hr>
                     </div>
-                    <div class="cus">
-                        @if ($cus->isEmpty())
-                            <div class="row">
-                                <div xxx="fade-up" xxx="400" class="alert alert-info d-flex justify-content-center align-items-center" role="alert" style="width:90%;">
-                                    Uppss.. Nothing someone registered now!
-                                </div>
-                            </div>
-                        @else
-                            <div class="row d-flex justify-content-center align-items-center">
-                            @foreach ($pdc as $pd)
-                                <div class="col-md-4 d-flex justify-content-center align-items-center" style="margin-top:25px;">
-                                    <div class="card" style="width: 300px;">
-                                        <img xxx="fade-up" xxx="400" src="{{asset('storage/photo/'.$pd->prdpht)}}" class="card-img-top img-responsive margin" alt="Product" style="width : 300px; height: 223px;">
-                                        <div xxx="fade-up" xxx="500" class="card-body">
-                                            <h5 class="card-title" style="padding-top:2% 0;"><a style="text-decoration: none; color:inherit;" href="{{ route('pd.show', [$pd->IDCar, $user->IDAdmin]) }}">{{$pd->name}}</a></h5>
-                                            <p class="card-text" style="text-align: justify;">Harga: Rp{{ number_format($pd->price, 2, ',', '.') }} <br><div style="margin-top:1px;">{{ \App\Helpers\StringHelper::limitWords($pd->descr, 15) }} ...</div> </p>
-                                            <p class="card-text"><small class="text-body-secondary">Stok : {{ $pd->prdqty }}</small></p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <a href="{{ route('pd.up', ['id' => $pd->IDCar]) }}"><i class="fa fa-edit" style="font-size: 20px; margin-right: 10px;"></i></a>
-                                            <a href="#" data-toggle="modal" data-target="#deleteModal{{$pd->IDCar}}"><i class="fa fa-trash" style="font-size: 20px;"></i></a>
-                                            <div class="modal fade" id="deleteModal{{$pd->IDCar}}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{$pd->IDCar}}" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="deleteModalLabel{{$pd->IDCar}}">Konfirmasi Hapus</h5>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            Apakah Anda yakin ingin menghapus produk ini?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                            <a href="{{ route('pd.del', ['id' => $pd->IDCar]) }}" class="btn btn-danger">Hapus</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                                <div xxx="fade-up" xxx="100" class="d-flex justify-content-center" style="margin-top:2%;">
-                                    {{ $pdc->links('pagination::bootstrap-4') }}
-                                </div>
-                            </div>
-                        @endif <hr>
-                    </div>
+                    
                     <div class="trs">
                         @if ($cus->isEmpty())
                             <div class="row">
