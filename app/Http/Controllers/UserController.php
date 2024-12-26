@@ -111,28 +111,22 @@ class userController extends Controller
     public function showProfileus(){
         $userus = session('userus');
         $user = session('user');
-        $userString = strval($userus->IDusr);
 
-        if (!$userus || $user) {
+        if (!$userus || $user || is_null($userus)) {
             return redirect()->route('loginus');
         }else{
+            $userString = strval($userus->IDusr);
             $userId = Auth::id(); 
-            $pdc = DB::table('katalog')
-                //->where('idusr_kbt', $userString)
-                ->paginate(3);
-            $cus = DB::table('user')
-                ->paginate(10);
 
             $transactions = DB::table('transaksi as t')
             ->join('katalog as p', DB::raw('t.produk COLLATE utf8mb4_unicode_ci'), '=', DB::raw('p.IDCar COLLATE utf8mb4_unicode_ci'))
             ->join('user as u', DB::raw('t.userID COLLATE utf8mb4_unicode_ci'), '=', DB::raw('u.IDusr COLLATE utf8mb4_unicode_ci'))
-            ->select('p.name', 'p.prdpht', 't.total_harga', 'p.address', 'u.name as nama_user')
-            //->where(DB::raw('u.idusr_kbt COLLATE utf8mb4_unicode_ci'), '=', $userString)
-            ->paginate(2);
+            ->select('p.name', 'p.prdpht', 't.total_harga',  'u.name as nama_user')
+            ->get();
 
-            $pdc = DB::table('katalog')->paginate(3);
+            $pdc = DB::table('katalog')->get();
 
-            return view('Page.us.profile', compact('user', 'userString', 'userId', 'transactions','pdc', 'cus'));
+            return view('Page.us.profile', compact('user', 'userString', 'userId', 'transactions','pdc'));
         }
     }
     public function indexhm(){
@@ -147,4 +141,18 @@ class userController extends Controller
 			'us' => $userString,
 		]); 
     }
+    public function show($id, $ide) {
+        $userus = session('userus');
+        $user = session('user');
+
+        if (!$userus || $user || is_null($userus)) {
+            return redirect()->route('loginus');
+        }else{
+            $content = DB::table('katalog')->where('IDCar', $id)->get();
+            $pdcvarB = DB::table('katalog')->paginate(3);
+            $user = session('userus');
+            $userString = strval($userus->IDusr);
+            return view('Page.us.buycart', compact('content', 'id', 'pdcvarB', 'userString'));
+        }
+	}
 }

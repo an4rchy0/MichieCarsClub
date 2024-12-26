@@ -25,6 +25,10 @@
 	<!--===============================================================================================-->
 </head>
 <body class="animsition">
+<audio autoplay loop id="bgMusic">
+	<source src="{{ asset('images/banM/m2.mp3') }}" type="audio/mpeg">Your browser does not support the audio element.
+</audio>
+
 	<!-- Header -->
 	<header>
 		<div class="container-menu-desktop">
@@ -147,7 +151,7 @@
 				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
 					<div class="block1 wrap-pic-w">
 						<img src="images/block1.jpg" alt="IMG-BANNER">
-						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+						<span class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 							<div class="block1-txt-child1 flex-col-l">
 								<span class="block1-name ltext-102 trans-04 p-b-8">Daily</span>
 								<span class="block1-info stext-102 trans-04">Every Day</span>
@@ -155,13 +159,13 @@
 							<div class="block1-txt-child2 p-b-4 trans-05">
 								<div class="block1-link stext-101 cl0 trans-09">Shop Now</div>
 							</div>
-						</a>
+						</span>
 					</div>
 				</div>
 				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
 					<div class="block1 wrap-pic-w">
 						<img src="images/block2.jpg" alt="IMG-BANNER">
-						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+						<span class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 							<div class="block1-txt-child1 flex-col-l">
 								<span class="block1-name ltext-102 trans-04 p-b-8">Sport</span>
 								<span class="block1-info stext-102 trans-04">Race</span>
@@ -169,13 +173,13 @@
 							<div class="block1-txt-child2 p-b-4 trans-05">
 								<div class="block1-link stext-101 cl0 trans-09">Shop Now</div>
 							</div>
-						</a>
+						</span>
 					</div>
 				</div>
 				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
 					<div class="block1 wrap-pic-w">
 						<img src="images/block3.jpg" alt="IMG-BANNER">
-						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+						<span class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 							<div class="block1-txt-child1 flex-col-l">
 								<span class="block1-name ltext-102 trans-04 p-b-8">Electric</span>
 								<span class="block1-info stext-102 trans-04">New Trend</span>
@@ -183,7 +187,7 @@
 							<div class="block1-txt-child2 p-b-4 trans-05">
 								<div class="block1-link stext-101 cl0 trans-09">Shop Now</div>
 							</div>
-						</a>
+						</span>
 					</div>
 				</div>
 			</div>
@@ -220,12 +224,12 @@
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="{{asset('storage/photo/'.$p->prdpht)}}" alt="IMG-PRODUCT">
-							<a href="#" data-toggle="modal" data-target="#prevModal{{$p->IDCar}}" style="text-decoration:none; color:inherit;" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">Quick View</a></h5>
+							<a href="{{ route('pd.show', [$p->IDCar, 00000]) }}" style="text-decoration:none; color:inherit;" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">Quick View</a></h5>
 						</div>
 
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
-								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">{{$p->name}}</a>
+								<a style="text-decoration: none; color:inherit;" href="{{ route('pd.show', [$p->IDCar, 00000]) }}">{{$p->name}}</a>
 								<span class="stext-105 cl3">Price: Rp{{ number_format($p->price, 2, ',', '.') }}</span>
 							</div>
 							<div class="block2-txt-child2 flex-r p-t-3">
@@ -236,183 +240,74 @@
 							</div>
 						</div>
 					</div>
-					<!-- Modal1 -->
-					<div class="modal fade" id="prevModal{{$p->IDCar}}" tabindex="-1" role="dialog" aria-labelledby="prevModalLabel{{$p->IDCar}}" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 80%;">
-                            <div class="modal-content">
-        	                    <div class="modal-header">
-                                    <h5 class="modal-title" id="prevModalLabel{{$p->IDCar}}">Preview Produk</h5>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row" style="padding:0% 3%;">
-                                        <div class="modal-body">
-                                            <div class="row" style="padding:0% 3%;">
-												<div class="col-md-6">
-													<img src="{{asset('storage/photo/'.$p->prdpht)}}" alt="Product" width="300px">
-												</div>
-												<div class="col-md-6">
-													<h1>{{$p->name}}</h1> <br> 
-													Avaibility : {{ $p->prdqty > 0 ? 'Available' : 'Not Available' }}<br> 
-													Harga : Rp{{ number_format($p->price, 2, ',', '.') }}
-													<form action="/stbuy" method="post" class="bg-body-tertiary rounded-3" style="padding:2%" enctype="multipart/form-data">
-														<fieldset>
-															{{csrf_field()}}
-															<div class="form-group">
-																<input type="text" class="form-control" name="pdcid" value="{{ $p->IDCar }}" hidden>
-															</div>
-															<div class="form-group">
-																Alamat : <textarea type="text" name="address" id="address" class="form-control" placeholder="Alamat pengiriman" style="height: 100px;" required></textarea>
-															</div>
-															<div class="form-group">
-																Jasa Kirim & Aplikasi : <input type="text" class="form-control" name="price" required="required" placeholder="Biaya Jasa & Aplikasi" disabled>
-															</div>
-															<div class="form-group">
-																Total
-																<div class="input-group mb-3">
-																	<div class="input-group-append">
-																		<span class="input-group-text" style="padding
-																		:1%;" id="basic-addon1">Rp</span>
-																	</div>
-																	<input type="text" class="form-control" name="total" id="total" required="required" placeholder="Total" style="background-color: #E7E9E7;" readonly>
-																</div>
-															</div>
-															<div class="form-group form-inline"> 
-																<input type="text" class="form-control" name="usid" required="required" placeholder="Total" style="margin-right: 10px;" value="{{ 9218 }}" hidden>
-															</div>
-															<div class="form-group" style="margin-top:3%;"> 
-																<input type="submit" value="Beli Sekarang" class="btn btn-primary form-control"> 
-															</div>
-														</fieldset>
-													</form>
-												</div>
-                                            </div>
-                                        </div>     
-                                    </div>
-                                </div>
-                            <div class="modal-footer"></div>
-                    	</div></div>
-                    </div>
 				</div>
 				@endforeach
 				<div class="d-flex justify-content-center">
 					{{ $pdc->links('pagination::bootstrap-4') }}
 				</div>
 			</div>
-
 		</div>
 	</section>
-
 
 	<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-6 col-lg-3 p-b-50">
+				<div class="col-sm-6 col-lg-4 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">Categories</h4>
 					<ul>
 						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Daily
-							</a>
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">Daily</a>
 						</li>
-
 						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Sport
-							</a>
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">Sport</a>
 						</li>
-
 						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Electric
-							</a>
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">Electric</a>
 						</li>
 					</ul>
 				</div>
 
-				<div class="col-sm-6 col-lg-3 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">Help</h4>
-
-					<ul>
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Track Order
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Returns 
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Shipping
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								FAQs
-							</a>
-						</li>
-					</ul>
-				</div>
-
-				<div class="col-sm-6 col-lg-3 p-b-50">
+				<div class="col-sm-6 col-lg-4 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">GET IN TOUCH</h4>
-					<p class="stext-107 cl7 size-201">Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879</p>
+					<p class="stext-107 cl7 size-201">Jl. Halimun Raya No.11 8, RT.8/RW.2 12980 Daerah Khusus Ibukota Jakarta Indonesia</p>
 					<div class="p-t-27">
-						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-facebook"></i>
-						</a>
-
-						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-instagram"></i>
-						</a>
-
-						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-pinterest-p"></i>
-						</a>
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16"><i class="fa-brands fa-instagram"></i></a>
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16"><i class="fa-brands fa-twitter"></i></a>
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16"><i class="fa-brands fa-youtube"></i></a>
 					</div>
 				</div>
 
-				<div class="col-sm-6 col-lg-3 p-b-50">
+				<div class="col-sm-6 col-lg-4 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">Newsletter</h4>
 					<form>
 						<div class="wrap-input1 w-full p-b-4">
-							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
+							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="pals@mail.com">
 							<div class="focus-input1 trans-04"></div>
 						</div>
 
 						<div class="p-t-18">
-							<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-								Subscribe
-							</button>
+							<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04" style="background-color:#FFD017;">Email</button>
 						</div>
 					</form>
 				</div>
 			</div>
 
 			<div class="p-t-40">
+				<center>
 				<div class="flex-c-m flex-w p-b-18">
-					<a href="#" class="m-all-1"><img src="images/icons/icon-pay-01.png" alt="ICON-PAY"></a>
-					<a href="#" class="m-all-1"><img src="images/icons/icon-pay-02.png" alt="ICON-PAY"></a>
-					<a href="#" class="m-all-1"><img src="images/icons/icon-pay-03.png" alt="ICON-PAY"></a>
-					<a href="#" class="m-all-1"><img src="images/icons/icon-pay-04.png" alt="ICON-PAY"></a>
-					<a href="#" class="m-all-1"><img src="images/icons/icon-pay-05.png" alt="ICON-PAY"></a>
+					<a href="#" class="m-all-1"><img src="images/icons/OIP.jpg" style="width:30%;" alt="ICON-PAY"></a>
 				</div>
+				</center>
 
 				<p class="stext-107 cl6 txt-center">
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+					Copyright &copy;<script>document.write(new Date().getFullYear());</script> MichieCars Club
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				</p>
 			</div>
 		</div>
 	</footer>
-
 
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">

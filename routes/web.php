@@ -19,13 +19,13 @@ Route::get('/', function () {
     return view('Page.index');
 });
 Route::get('/test', function () {
-    return view('Page.home-02');
+    return view('Page.shoping-cart');
 });
 Route::get('/', [UserController::class, 'indexhm']);
 
 //usr
 Route::post('/loginus', [UserController::class, 'loginus'])->name('psuslogin');
-Route::get('/profileus', [UserController::class, 'showProfileus'])->middleware('authus');
+Route::get('/profileus', [UserController::class, 'showProfileus']);
 Route::get('/loginus', function() {
     return view('Page.us.usLog');
 })->name('loginus');
@@ -33,7 +33,7 @@ Route::get('/regis', function(){
     return view('Page.us.register');
 });
 Route::post('/UsReg', [UserController::class, 'storeus']);
-Route::get('/buyPd/{id}/{ide}', [UserController::class, 'show'])->name('pd.show')->middleware('authus');
+Route::get('/buyPd/{id}/{ide}', [UserController::class, 'show'])->name('pd.show');
 
 //admin
 Route::post('/login', [UserController::class, 'login'])->name('pslogin');

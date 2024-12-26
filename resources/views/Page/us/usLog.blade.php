@@ -17,10 +17,23 @@
     <style>
         body {
             display: flex;
-            background-image: url({{ asset('images/block1.jpg') }});
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #bgVideo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            background-size: cover;
         }
         .navbar-nav .nav-link {
             color: #FFFFFF;
@@ -38,11 +51,23 @@
     </style>
 </head>
 <body class="font-roboto bg-gray-100">
+<audio autoplay loop id="bgMusic">
+    <source src="{{ asset('images/banM/m.mp3') }}" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<video autoplay muted loop id="bgVideo"> 
+    <source src="{{ asset('images/banM/V2.mp4') }}" type="video/mp4"> 
+    Your browser does not support HTML5 video. 
+</video>
 
 <div class="center-element" style="margin:5%;">
+    <center><b><H1 style="color:#ffff;"data-aos="fade-up" data-aos-delay="50000">Your cars is 
+        <span style="color:#EDBF0E;"data-aos="fade-up" data-aos-delay="80000">your own</span>
+    </H1></b></center>
     <div class="row justify-content-md-center">
     <div class="col-12" style="padding:3%; color:#4051E0;" data-aos="slide-left" data-aos-delay="300">
-        <div class="row justify-content-md-center bg1" style="background-color: rgba(255, 255, 255, 0.75); padding:50px;">
+        <div class="row justify-content-md-center bg1" style="background-color: rgba(255, 255, 255, 0.5); padding:50px;">
             <h3>Welcome</h3><hr>
             @if (session('msg'))
                 <div class="alert alert-danger">

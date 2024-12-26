@@ -19,11 +19,35 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: url('{{ asset('img/bg2.png') }}');
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #bgVideo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            background-size: cover;
         }
     </style>
 </head>
 <body class="font-roboto bg-gray-100">
+<audio autoplay loop id="bgMusic">
+    <source src="{{ asset('images/banM/m.mp3') }}" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<video autoplay muted loop id="bgVideo"> 
+    <source src="{{ asset('images/banM/V2.mp4') }}" type="video/mp4"> 
+    Your browser does not support HTML5 video. 
+</video>
+
 <div class="center-element" style="margin:5%;">
     <div class="row justify-content-md-center">
         <div class="col-md-6" style="padding:3%; color:#4051E0;" data-aos="slide-right" data-aos-delay="100">
@@ -77,7 +101,7 @@
                         </div>
                     </fieldset>
                 </form>
-                <center><hr>Sudah Memiliki Akun? <a href="/login">Login</a></center>
+                <center><hr>Sudah Memiliki Akun? <a href="/loginus">Login</a></center>
             </div>
         </div>
         <div class="col-md-6" style="background-color:#4051E0; padding:5%; color:white;" data-aos="slide-right" data-aos-delay="200">
