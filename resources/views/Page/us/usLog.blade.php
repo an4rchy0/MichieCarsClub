@@ -66,9 +66,9 @@
         <span style="color:#EDBF0E;"data-aos="fade-up" data-aos-delay="80000">your own</span>
     </H1></b></center>
     <div class="row justify-content-md-center">
-    <div class="col-12" style="padding:3%; color:#4051E0;" data-aos="slide-left" data-aos-delay="300">
+    <div class="col-12" style="padding:3%;" data-aos="slide-left" data-aos-delay="300">
         <div class="row justify-content-md-center bg1" style="background-color: rgba(255, 255, 255, 0.5); padding:50px;">
-            <h3>Welcome</h3><hr>
+            <center></center><h3>Welcome</h3><hr>
             @if (session('msg'))
                 <div class="alert alert-danger">
                     {{ session('msg') }}
@@ -84,7 +84,7 @@
                         Password: <input type="password" class="form-control" name="password" required="required" data-aos="fade-up" data-aos-delay="500">
                     </div>
                     <div class="form-group" style="margin-top:3%;">
-                        <input type="submit" value="Masuk" class="btn btn-primary form-control" data-aos="fade-up" data-aos-delay="600">
+                        <input type="submit" value="Login" class="btn form-control" style="background-color:#FFD017;" data-aos="fade-up" data-aos-delay="600">
                     </div>
                     <div class="form-group" style="margin-top:3%;">
                         <span>Dont have any account?<a href="/regis">create here</a></span>

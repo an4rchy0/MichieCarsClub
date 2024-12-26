@@ -1,114 +1,42 @@
-
-					<!-- Modal1 -->
-					<div class="modal fade" id="prevModal{{$p->IDCar}}" tabindex="-1" role="dialog" aria-labelledby="prevModalLabel{{$p->IDCar}}" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 80%;">
-                            <div class="modal-content">
-        	                    <div class="modal-header">
-                                    <h5 class="modal-title" id="prevModalLabel{{$p->IDCar}}">Preview Produk</h5>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row" style="padding:0% 3%;">
-                                        <div class="modal-body">
-                                            <div class="row" style="padding:0% 3%;">
-												<div class="col-md-6">
-													<img src="{{asset('storage/photo/'.$p->prdpht)}}" alt="Product" width="300px">
-												</div>
-												<div class="col-md-6">
-													<h1>{{$p->name}}</h1> <br> 
-													Avaibility : {{ $p->prdqty > 0 ? 'Available' : 'Not Available' }}<br> 
-													Harga : Rp{{ number_format($p->price, 2, ',', '.') }}
-													<form action="/stbuy" method="post" class="bg-body-tertiary rounded-3" style="padding:2%" enctype="multipart/form-data">
-														<fieldset>
-															{{csrf_field()}}
-															<div class="form-group">
-																<input type="text" class="form-control" name="pdcid" value="{{ $p->IDCar }}" hidden>
-															</div>
-															<div class="form-group">
-																Alamat : <textarea type="text" name="address" id="address" class="form-control" placeholder="Alamat pengiriman" style="height: 100px;" required></textarea>
-															</div>
-															<div class="form-group">
-																Jasa Kirim & Aplikasi : <input type="text" class="form-control" name="price" required="required" placeholder="Biaya Jasa & Aplikasi" disabled>
-															</div>
-															<div class="form-group">
-																Total
-																<div class="input-group mb-3">
-																	<div class="input-group-append">
-																		<span class="input-group-text" style="padding
-																		:1%;" id="basic-addon1">Rp</span>
-																	</div>
-																	<input type="text" class="form-control" name="total" id="total" required="required" placeholder="Total" style="background-color: #E7E9E7;" readonly>
-																</div>
-															</div>
-															<div class="form-group form-inline"> 
-																<input type="text" class="form-control" name="usid" required="required" placeholder="Total" style="margin-right: 10px;" value="{{ 9218 }}" hidden>
-															</div>
-															<div class="form-group" style="margin-top:3%;"> 
-																<input type="submit" value="Beli Sekarang" class="btn btn-primary form-control"> 
-															</div>
-														</fieldset>
-													</form>
-												</div>
-                                            </div>
-                                        </div>     
-                                    </div>
-                                </div>
-                            <div class="modal-footer"></div>
-                    	</div></div>
-                    </div>
-
-					<fieldset>
-						{{csrf_field()}}
-						<div class="form-group">
-							<input type="text" class="form-control" name="pdcid" value="{{ $p->IDCar }}" hidden>
-						</div>
-						<div class="form-group">
-							Alamat : <textarea type="text" name="address" id="address" class="form-control" placeholder="Alamat pengiriman" style="height: 100px;" required></textarea>
-						</div>
-						<div class="form-group">
-							Biaya Jasa & Aplikasi<input type="text" class="form-control" name="send" id="send" placeholder="Biaya Jasa & Aplikasi" disabled>
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" name="total" id="total" required="required" placeholder="Total" style="background-color: #E7E9E7;" readonly hidden>
-						</div>
-						<div class="form-group form-inline"> 
-							<input type="text" class="form-control" name="usid" placeholder="Total" style="margin-right: 10px;" value="{{ 9218 }}" hidden>
-						</div>
-					</fieldset>
-					
-					<script>
-						document.getElementById('address').addEventListener('input', function() {
-							var sendInput = document.getElementById('send');
-							var randomValue = Math.floor(Math.random() * (3000000 - 1000000 + 1)) + 1000000;
-							sendInput.value = randomValue;
-						});
-					</script>
-
-
-<fieldset>
-    {{csrf_field()}}
-    <div class="form-group">
-        <input type="text" class="form-control" name="pdcid" value="{{ $p->IDCar }}" hidden>
-    </div>
-    <div class="form-group">
-        Alamat : <textarea type="text" name="address" id="address" class="form-control" placeholder="Alamat pengiriman" style="height: 100px;" required></textarea>
-    </div>
-    <div class="form-group">
-        Biaya Jasa & Aplikasi<input type="text" class="form-control" name="send" id="send" placeholder="Biaya Jasa & Aplikasi" disabled>
-    </div>
-    <div class="form-group">
-        <input type="text" class="form-control" name="total" id="total" required="required" placeholder="Total" style="background-color: #E7E9E7;" readonly hidden>
-    </div>
-    <div class="form-group form-inline"> 
-        <input type="text" class="form-control" name="usid" placeholder="Total" style="margin-right: 10px;" value="{{ 9218 }}" hidden>
-    </div>
-</fieldset>
-
-<script>
-    document.getElementById('address').addEventListener('input', function() {
-        var sendInput = document.getElementById('send');
-        var randomValue = Math.floor(Math.random() * (3000000 - 1000000 + 1)) + 1000000;
-        sendInput.value = randomValue;
-    });
-</script>
-
-					
+<!-- Add this in your CSS file -->
+<style>
+	body, html {
+	  margin: 0;
+	  padding: 0;
+	}
+	.navbar {
+	  position: absolute;
+	  top: 0;
+	  width: 100%;
+	  background-color: rgba(255, 255, 255, 0.5); /* Adjust the transparency here */
+	  z-index: 1; /* Ensures the navbar is on top */
+	}
+	.banner {
+	  width: 100%;
+	  height: 100vh; /* Full viewport height */
+	  overflow: hidden;
+	}
+	.container {
+	  position: relative;
+	  z-index: 2; /* Ensures the content is on top of the video */
+	}
+  </style>
+  
+  <!-- Your HTML -->
+  <div class="navbar">
+	<div class="container">
+	  <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+		<a href="/profileus" class="stext-109 cl8 hov-cl1 trans-04">Home<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i></a>
+		<span class="stext-109 cl4">Payment</span>
+	  </div>
+	</div>
+  </div>
+  
+  <!-- Banner Section -->
+  <div class="banner">
+	<video autoplay muted loop id="bgVideo"> 
+	  <source src="{{ asset('images/banM/V2.mp4') }}" type="video/mp4"> 
+	  Your browser does not support HTML5 video. 
+	</video>
+  </div>
+  

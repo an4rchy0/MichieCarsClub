@@ -7,6 +7,31 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
+if (!function_exists('gnrid')) {
+    function generateid(){
+        $hari = date('l');
+        $tanggal = date('d');
+        $bulan = date('M');
+        $blnangka = date('m');
+        $tahun = date('y');
+        $jam = date('h');
+        $minute = date('i');
+        $detik = date('s');
+        $haricut = substr($hari,0,1);
+        $bulancut = substr($bulan,0,1);
+        $hourcut = substr($jam,0,1);
+        $minutecut = substr($minute,0,1);
+        $detikcut = substr($detik,0,1);
+        $kodejoin = "-{$haricut}{$bulancut}{$hourcut}{$minutecut}{$detikcut}";
+        return $kodejoin;
+    }
+}
+if (!function_exists('tanggal')) { 
+    function tanggal(){ 
+        return date('Y-m-d'); // Returns the date in YYYY-MM-DD format 
+    } 
+}
+
 class userController extends Controller
 {
     //admin
@@ -62,9 +87,10 @@ class userController extends Controller
     		'IDCar'		=> $request->prdid,
     		'name'		=> $request->prdname,
     		'price'		=> $request->prdprice,
-    		'descr'	=> $request->prddescript,
-    		'prdpht'       	=> $fileName,
-			'IDAdmin'		=> $request->prdus,
+    		'descr'	    => $request->prddescript,
+    		'prdpht'    => $fileName,
+            'prdqty'    => 1,
+			'IDAdmin'	=> $request->prdus,
     	]);
 		return redirect('/profile')->with('msg', 'Data Stored Successfully');
 	}
@@ -121,7 +147,8 @@ class userController extends Controller
             $transactions = DB::table('transaksi as t')
             ->join('katalog as p', DB::raw('t.produk COLLATE utf8mb4_unicode_ci'), '=', DB::raw('p.IDCar COLLATE utf8mb4_unicode_ci'))
             ->join('user as u', DB::raw('t.userID COLLATE utf8mb4_unicode_ci'), '=', DB::raw('u.IDusr COLLATE utf8mb4_unicode_ci'))
-            ->select('p.name', 'p.prdpht', 't.total_harga',  'u.name as nama_user')
+            ->where('t.userID', $userString)
+            ->select('t.IDTrans','p.name', 'p.prdpht', 't.total_harga',  'u.name as nama_user', 't.produk', 'p.descr', 't.address', 't.tanggal')
             ->get();
 
             $pdc = DB::table('katalog')->get();
@@ -154,5 +181,16 @@ class userController extends Controller
             $userString = strval($userus->IDusr);
             return view('Page.us.buycart', compact('content', 'id', 'pdcvarB', 'userString'));
         }
+	}
+    public function storepay(Request $request){
+		DB::table('transaksi')->insert([
+    		'IDTrans'	    => 'Tr' . generateid(),
+    		'tanggal'	    => tanggal(),
+    		'total_harga'	=> $request->send,
+    		'produk'        => $request->pdcid,
+    		'address'       => $request->address,
+			'userID'	    => $request->usid,
+    	]);
+		return redirect('/profileus')->with('msg', 'Data Stored Successfully');
 	}
 }

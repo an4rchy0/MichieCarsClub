@@ -33,6 +33,7 @@ Route::get('/regis', function(){
     return view('Page.us.register');
 });
 Route::post('/UsReg', [UserController::class, 'storeus']);
+Route::post('/mpay', [UserController::class, 'storepay']);
 Route::get('/buyPd/{id}/{ide}', [UserController::class, 'show'])->name('pd.show');
 
 //admin

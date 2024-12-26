@@ -50,7 +50,7 @@
 
 <div class="center-element" style="margin:5%;">
     <div class="row justify-content-md-center">
-        <div class="col-md-6" style="padding:3%; color:#4051E0;" data-aos="slide-right" data-aos-delay="100">
+        <div class="col-md-12" style="padding:3%;" data-aos="slide-right" data-aos-delay="100">
             <div class="row justify-content-md-center" style="background-color: rgba(255, 255, 255, 0.5); padding:20px;">
                 <?php 
                     if (!function_exists('genid')) { 
@@ -97,15 +97,12 @@
                             <input data-aos="fade-up" data-aos-delay="600" type="password" class="form-control" name="uspass" placeholder="Password" aria-label="Recipient's username" aria-describedby="basic-addon2" required="required">
                         </div>
                         <div class="form-input mb-3" style="margin-top:3%;">
-                            <input data-aos="fade-up" data-aos-delay="700" type="submit" value="Daftar" class="btn btn-primary form-control">
+                            <input data-aos="fade-up" data-aos-delay="700" type="submit" value="Daftar" class="btn form-control" style="background-color:#FFD017;color:black;">
                         </div>
                     </fieldset>
                 </form>
-                <center><hr>Sudah Memiliki Akun? <a href="/loginus">Login</a></center>
+                <center><hr><b>Have an account? <a href="/loginus">Click here</a></b></center>
             </div>
-        </div>
-        <div class="col-md-6" style="background-color:#4051E0; padding:5%; color:white;" data-aos="slide-right" data-aos-delay="200">
-            
         </div>
     </div>
 </div>
