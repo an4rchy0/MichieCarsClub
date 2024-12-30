@@ -39,10 +39,10 @@
 					<div class="menu-desktop">
 						<ul class="main-menu" style="font-weight: bold;">
 							<li class="active-menu"><a href="/">Home</a></li>
-							<li><a href="product.html" style="text-decoration:none;">Shop</a></li>
-							<li><a href="blog.html" style="text-decoration:none;">Blog</a></li>
-							<li><a href="about.html" style="text-decoration:none;">About</a></li>
-							<li><a href="contact.html" style="text-decoration:none;">Contact</a></li>
+							<li><a href="#prd" style="text-decoration:none;">Shop</a></li>
+							<li><a href="#blog" style="text-decoration:none;">Event</a></li>
+							<li><a href="#footer" style="text-decoration:none;">About</a></li>
+							<li><a href="#footer" style="text-decoration:none;">Contact</a></li>
 						</ul>
 					</div>	
 
@@ -85,15 +85,14 @@
 			</div>
 		</div>
 
-
 		<!-- Menu Mobile -->
 		<div class="menu-mobile">
 			<ul class="main-menu-m">
 				<li class="active-menu"><a href="/">Home</a></li>
-				<li><a href="product.html" style="text-decoration:none;">Shop</a></li>
-				<li><a href="blog.html" style="text-decoration:none;">Blog</a></li>
-				<li><a href="about.html" style="text-decoration:none;">About</a></li>
-				<li><a href="contact.html" style="text-decoration:none;">Contact</a></li>
+				<li><a href="#prd" style="text-decoration:none;">Shop</a></li>
+				<li><a href="#blog" style="text-decoration:none;">Event</a></li>
+				<li><a href="#footer" style="text-decoration:none;">About</a></li>
+				<li><a href="#footer" style="text-decoration:none;">Contact</a></li>
 			</ul>
 		</div>
 	</header>
@@ -202,7 +201,7 @@
 	</div>
 
 	<!-- Product -->
-	<section class="sec-product bg0 p-t-100 p-b-50">
+	<section class="sec-product bg0 p-t-100 p-b-50" id="prd">
 		<div class="container">
 			<div class="p-b-32">
 				<h3 class="ltext-105 cl5 txt-center respon1">Your Cars is your own</h3>
@@ -294,7 +293,7 @@
 	</section>
 
 	<!-- Blog -->
-	<section class="sec-blog bg0 p-t-60 p-b-90">
+	<section class="sec-blog bg0 p-t-60 p-b-90" id="blog">
 		<div class="container">
 			<div class="p-b-66">
 				<h3 class="ltext-105 cl5 txt-center respon1">
@@ -469,7 +468,7 @@
 
 				<div class="col-sm-6 col-lg-4 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">Newsletter</h4>
-					<form>
+					<form id="footer">
 						<div class="wrap-input1 w-full p-b-4">
 							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="pals@mail.com">
 							<div class="focus-input1 trans-04"></div>

@@ -38,10 +38,10 @@
 					<div class="menu-desktop">
 						<ul class="main-menu" style="font-weight: bold;">
 							<li class="active-menu"><a href="/">Home</a></li>
-							<li><a href="product.html" style="text-decoration:none;">Shop</a></li>
-							<li><a href="blog.html" style="text-decoration:none;">Blog</a></li>
-							<li><a href="about.html" style="text-decoration:none;">About</a></li>
-							<li><a href="contact.html" style="text-decoration:none;">Contact</a></li>
+							<li><a href="#prd" style="text-decoration:none;">Shop</a></li>
+							<li><a href="/profileus" style="text-decoration:none;">Event</a></li>
+							<li><a href="/profileus" style="text-decoration:none;">About</a></li>
+							<li><a href="#footer" style="text-decoration:none;">Contact</a></li>
 						</ul>
 					</div>	
 
@@ -83,10 +83,10 @@
 		<div class="menu-mobile">
 			<ul class="main-menu-m">
 				<li class="active-menu"><a href="/">Home</a></li>
-				<li><a href="product.html" style="text-decoration:none;">Shop</a></li>
-				<li><a href="blog.html" style="text-decoration:none;">Blog</a></li>
-				<li><a href="about.html" style="text-decoration:none;">About</a></li>
-				<li><a href="contact.html" style="text-decoration:none;">Contact</a></li>
+				<li><a href="#prd" style="text-decoration:none;">Shop</a></li>
+				<li><a href="/profileus" style="text-decoration:none;">Event</a></li>
+				<li><a href="/profileus" style="text-decoration:none;">About</a></li>
+				<li><a href="#footer" style="text-decoration:none;">Contact</a></li>
 			</ul>
 		</div>
 	</header>
@@ -250,7 +250,7 @@
 	</section>
 
 	<!-- Footer -->
-	<footer class="bg3 p-t-75 p-b-32">
+	<footer class="bg3 p-t-75 p-b-32" id="footer">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6 col-lg-4 p-b-50">
@@ -280,7 +280,7 @@
 
 				<div class="col-sm-6 col-lg-4 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">Newsletter</h4>
-					<form>
+					<form id="footer">
 						<div class="wrap-input1 w-full p-b-4">
 							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="pals@mail.com">
 							<div class="focus-input1 trans-04"></div>
@@ -302,7 +302,7 @@
 
 				<p class="stext-107 cl6 txt-center">
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					Copyright &copy;<script>document.write(new Date().getFullYear());</script> MichieCars Club
+					Copyright &copy;<script>document.write(new Date().getFullYear());</script> <b>LEXA SR</b> Cars Club
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				</p>
 			</div>

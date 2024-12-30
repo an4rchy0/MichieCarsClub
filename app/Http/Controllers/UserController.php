@@ -50,33 +50,40 @@ class userController extends Controller
             return redirect('/login')->with('msg', 'Kesalahan username &/ Password!');
         }
     }
+    public function getData(){
+        $getData = DB::table('transaksi as t')
+            ->join('katalog as p', DB::raw('t.produk COLLATE utf8mb4_unicode_ci'), '=', DB::raw('p.IDCar COLLATE utf8mb4_unicode_ci'))
+            ->join('user as u', DB::raw('t.userID COLLATE utf8mb4_unicode_ci'), '=', DB::raw('u.IDusr COLLATE utf8mb4_unicode_ci'))
+            ->select('p.name', 'p.prdpht', 't.total_harga', 't.tanggal', 't.address', 'u.name as nama_user', 't.produk')
+            ->get();
+        return view('Page.adm.getData', compact('getData'));
+    }
     public function showProfile(){
         $user = session('user');
         $userus = session('userus');
         $userString = strval($user->IDAdmin);
-
+    
         if (!$user || $userus) {
             return redirect()->route('login');
-        }else{
+        } else {
             $userId = Auth::id(); 
-            $pdc = DB::table('katalog')
-                //->where('idusr_kbt', $userString)
-                ->paginate(3);
-            $cus = DB::table('user')
-                ->paginate(10);
-
+            $pdc = DB::table('katalog')->paginate(4);
+            $cus = DB::table('user')->paginate(10);
+    
             $transactions = DB::table('transaksi as t')
-            ->join('katalog as p', DB::raw('t.produk COLLATE utf8mb4_unicode_ci'), '=', DB::raw('p.IDCar COLLATE utf8mb4_unicode_ci'))
-            ->join('user as u', DB::raw('t.userID COLLATE utf8mb4_unicode_ci'), '=', DB::raw('u.IDusr COLLATE utf8mb4_unicode_ci'))
-            ->select('p.name', 'p.prdpht', 't.total_harga', 'p.address', 'u.name as nama_user')
-            //->where(DB::raw('u.idusr_kbt COLLATE utf8mb4_unicode_ci'), '=', $userString)
-            ->paginate(2);
-
-            $pdc = DB::table('katalog')->paginate(3);
-
-            return view('Page.adm.profile', compact('user', 'userString', 'userId', 'transactions','pdc', 'cus'));
+                ->join('katalog as p', DB::raw('t.produk COLLATE utf8mb4_unicode_ci'), '=', DB::raw('p.IDCar COLLATE utf8mb4_unicode_ci'))
+                ->join('user as u', DB::raw('t.userID COLLATE utf8mb4_unicode_ci'), '=', DB::raw('u.IDusr COLLATE utf8mb4_unicode_ci'))
+                ->select('p.name', 'p.prdpht', 't.total_harga', 't.tanggal', 't.address', 'u.name as nama_user')
+                ->paginate(5);
+    
+            $totalUsers = User::count();
+            $totalCar = DB::table('katalog')->count();
+            $profit = DB::table('transaksi')->sum('total_harga');
+    
+            return view('Page.adm.profile', compact('user', 'userString', 'userId', 'transactions', 'pdc', 'cus', 'totalUsers', 'totalCar', 'profit'));
         }
     }
+    
     //manage
     public function store(Request $request){
 		$file = $request->file('prdpht');

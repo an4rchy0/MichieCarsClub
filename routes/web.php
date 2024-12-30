@@ -22,6 +22,7 @@ Route::get('/test', function () {
     return view('Page.shoping-cart');
 });
 Route::get('/', [UserController::class, 'indexhm']);
+Route::get('/conv', [UserController::class, 'getData']);
 
 //usr
 Route::post('/loginus', [UserController::class, 'loginus'])->name('psuslogin');
