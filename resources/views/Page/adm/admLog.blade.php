@@ -72,7 +72,7 @@
                 </div>
             @endif
             <form action="{{ route('pslogin') }}" method="post" class=" rounded-3" style="padding:5%" enctype="multipart/form-data">
-                <fieldset style="color:black;">
+                <fieldset style="color:white;">
                     {{csrf_field()}}
                     <div class="form-group">
                         <b>Username:</b> <input type="text" class="form-control" name="username" required="required" data-aos="fade-up" data-aos-delay="4000">

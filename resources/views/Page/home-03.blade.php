@@ -182,7 +182,6 @@
 		</div>
 	</header>
 
-
 	<!-- Sidebar -->
 	<aside class="wrap-sidebar js-sidebar">
 		<div class="s-full js-hide-sidebar"></div>
@@ -270,7 +269,6 @@
 		</div>
 	</aside>
 
-
 	<!-- Cart -->
 	<div class="wrap-header-cart js-panel-cart">
 		<div class="s-full js-hide-cart"></div>
@@ -323,8 +321,6 @@
 			</div>
 		</div>
 	</div>
-
-
 
 	<!-- Slider -->
 	<section class="section-slide">
@@ -406,7 +402,6 @@
 			<div class="wrap-slick1-dots p-lr-10"></div>
 		</div>
 	</section>
-
 
 	<!-- Banner -->
 	<div class="sec-banner bg0 p-t-80 p-b-50">

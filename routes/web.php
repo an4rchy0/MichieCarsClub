@@ -23,6 +23,7 @@ Route::get('/test', function () {
 });
 Route::get('/', [UserController::class, 'indexhm']);
 Route::get('/conv', [UserController::class, 'getData']);
+Route::get('/search', [UserController::class, 'search'])->name('search');
 
 //usr
 Route::post('/loginus', [UserController::class, 'loginus'])->name('psuslogin');
@@ -48,6 +49,7 @@ Route::get('/addc/{userId}', function($userId) {
     return view('Page.adm.admAdd', compact('userId'));
 })->name('addc')->middleware('auth');
 Route::get('/pd.del/{id}', [UserController::class, 'del'])->name('pd.del')->middleware('auth');
+Route::get('/pd.delus/{id}', [UserController::class, 'delus'])->name('pd.delus')->middleware('auth');
 Route::post('/PrdStore', [UserController::class, 'store'])->middleware('auth');
 Route::post('/upPD/{id}', [UserController::class, 'up'])->middleware('auth');
 

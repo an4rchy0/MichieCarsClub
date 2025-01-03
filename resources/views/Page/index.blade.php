@@ -203,12 +203,13 @@
 					<!-- Search product -->
 					<div class="dis-none panel-search w-full p-t-10 p-b-15">
 						<div class="bor8 dis-flex p-l-15">
-							<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04"><i class="zmdi zmdi-search"></i></button>
-							<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
-						</div>	
+							<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+								<i class="zmdi zmdi-search"></i>
+							</button>
+							<input id="search-input" class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+						</div>
 					</div>
 				</div>
-
 				<div class="flex-w flex-c-m m-tb-10">
 					<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
 						<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
@@ -216,6 +217,8 @@
 					</div>
 				</div>
 			</div>
+
+			<div id="search-results"></div>
 
 			<div class="row isotope-grid">
 				@foreach($pdc as $p)
@@ -382,6 +385,49 @@
 		        mainClass: 'mfp-fade'
 		    });
 		});
+		$(document).ready(function() {
+            $('#search-input').on('input', function() {
+                let query = $(this).val();
+                if(query.length > 2) {
+                    $.ajax({
+                        url: '{{ route('search') }}',
+                        method: 'GET',
+                        data: { q: query },
+                        success: function(response) {
+							$('#search-results').empty();
+							let row = $('<div class="row isotope-grid"></div>'); // Tambahkan elemen div dengan kelas row dan isotope-grid
+							response.forEach(function(result) {
+								let html = `
+								<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+									<div class="block2">
+										<div class="block2-pic hov-img0">
+											<img src="{{ asset('storage/photo/') }}/${result.prdpht}" alt="IMG-PRODUCT">
+											<a href="/buyPd/${result.IDCar}/0" style="text-decoration:none; color:inherit;" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">Quick View</a>
+										</div>
+										<div class="block2-txt flex-w flex-t p-t-14">
+											<div class="block2-txt-child1 flex-col-l ">
+												<a style="text-decoration: none; color:inherit;" href="{{ route('pd.show', ['', '00000']) }}/${result.IDCar}">${result.name}</a>
+												<span class="stext-105 cl3">Price: Rp${Number(result.price).toLocaleString('id-ID', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+											</div>
+											<div class="block2-txt-child2 flex-r p-t-3">
+												<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+													<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
+													<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>`;
+								row.append(html); // Masukkan elemen ke dalam div row
+							});
+							$('#search-results').append(row); // Tambahkan elemen row ke search-results
+						}
+                    });
+                } else {
+                    $('#search-results').empty();
+                }
+            });
+        });
 	</script>
 <!--===============================================================================================-->
 	<script src="vendor/isotope/isotope.pkgd.min.js"></script>

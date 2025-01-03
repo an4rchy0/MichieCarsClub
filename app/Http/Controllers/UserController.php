@@ -68,7 +68,7 @@ class userController extends Controller
         } else {
             $userId = Auth::id(); 
             $pdc = DB::table('katalog')->paginate(4);
-            $cus = DB::table('user')->paginate(10);
+            $cus = DB::table('user')->paginate(5);
     
             $transactions = DB::table('transaksi as t')
                 ->join('katalog as p', DB::raw('t.produk COLLATE utf8mb4_unicode_ci'), '=', DB::raw('p.IDCar COLLATE utf8mb4_unicode_ci'))
@@ -83,7 +83,6 @@ class userController extends Controller
             return view('Page.adm.profile', compact('user', 'userString', 'userId', 'transactions', 'pdc', 'cus', 'totalUsers', 'totalCar', 'profit'));
         }
     }
-    
     //manage
     public function store(Request $request){
 		$file = $request->file('prdpht');
@@ -111,6 +110,15 @@ class userController extends Controller
     }
     public function del($id){
     	DB::table('katalog')->where('IDCar',$id)->delete();
+    	return redirect('/profile')->with('succesMsg', 'Data berhasil dihapus!');
+    }
+    public function search(Request $request) {
+        $query = $request->input('q');
+        $results = DB::select("SELECT * FROM katalog WHERE name LIKE ?", ["%$query%"]);
+        return response()->json($results);
+    }    
+    public function delus($id){
+    	DB::table('user')->where('IDusr',$id)->delete();
     	return redirect('/profile')->with('succesMsg', 'Data berhasil dihapus!');
     }
 

@@ -324,25 +324,25 @@
                         <table class="table table-hover align-middle">
                         <thead class="table-light">
                             <tr>
-                            <th>#</th>
+                            <th>No</th>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
-                            <th>Actions</th>
+                            <th>Address</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                            <td>1</td>
-                            <td>Jane Doe</td>
-                            <td>jane.doe@example.com</td>
-                            <td>User</td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-primary">Edit</button>
-                                <button class="btn btn-sm btn-outline-danger">Delete</button>
-                            </td>
-                            </tr>
-                            <!-- Add more users -->
+                            @foreach ($cus as $index => $p)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $p->IDusr }}</td>
+                                    <td>{{ $p->name }}</td> 
+                                    <td>{{ $p->email }}</td> 
+                                    <td>Users</td>
+                                    <td>{{ $p->address }}</td> 
+                                </tr>
+                            @endforeach
                         </tbody>
                         </table>
                     </div>
@@ -352,9 +352,9 @@
 
             <!-- Manage Transactions -->
 			<section id="manage-users" class="mb-5">
-                <h2 class="mb-4">Manage Users</h2>
+                <h2 class="mb-4">Transactions Report</h2>
                 <div class="card shadow">
-                    <div class="card-header bg-dark text-white">User List</div>
+                    <div class="card-header bg-dark text-white">Transactions List</div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-hover align-middle">
